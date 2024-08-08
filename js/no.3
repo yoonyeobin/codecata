@@ -1,0 +1,11 @@
+오늘의 문제는 num1을 num2로 나눈 몫을 결과값으로 추출하는 문제이다.
+먼제 나누기 연산자를 확인해보니 '/'를 이용하는 것 같다.
+나누기를 하면 나머지가 생길 수도 있는데 몫만 추출하는 문제이니
+검색을 해본 결과 ' Math.floor' 라는 함수를 사용하면 소수점을 버릴 수 있다고 한다.
+
+그래서 내가 만든 코드는 아래와 같다.
+
+int solution(int num1, int num2) {
+    int answer = num1/num2;
+    return Math.floor(answer);
+}
