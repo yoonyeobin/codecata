@@ -1,0 +1,16 @@
+오늘의 문제는 정수 num이 짝수일 경우 홀수일 경우 구분하여 결과값을 반환하는 문제이다.
+
+function solution(num) {
+    var answer = ""
+    if(num % 2 === 0) {
+        answer = "Even";
+    } else {
+        answer = "Odd"
+    }
+    return answer;
+}
+
+if문을 사용하여 num의 나머지 값이 0일 경우(짝수)는 Even
+그게 아니라면 Odd를 출력하도록 하였다.
+
+쉽게 해결!!
