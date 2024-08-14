@@ -1,0 +1,30 @@
+이번 문제는 n을 x로 나눈 나머지가 1인 값중에 제일 작은 x를 출력하는 문제
+이번에는 x가 나머지 1이 되었을 때 반복을 멈추고 answer로 출력하면 되기 때문에
+while문을 적용하면 될 것 같다.
+
+function solution(n) {
+    var answer = 0;
+    let x = 1;
+    while (n % x === 1) {
+      answer = x;
+        x++;
+    }
+    return answer;
+}
+
+위와 같이 n을 1로 나눴을 때 나머지 값이 1이 되면 멈춰서 answer을 리턴하도록 코드를 짜봤는데...
+아니란다... 뭐가 문제일까...
+
+멍청했다 while문은 조건이 flase일 때 멈추는데 조건을 반대로 줬다
+
+function solution(n) {
+    var answer = 0;
+    let x = 1;
+    while (n % x !== 1) {
+        x++;
+         answer = x;
+    }
+    return answer;
+}
+
+위와 같이 1이 아닌 경우는 계속 계산을 돌리고 1일 때 멈춰서 answer로 return 해주면 된다!
