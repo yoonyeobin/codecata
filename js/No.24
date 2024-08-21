@@ -1,0 +1,33 @@
+오늘의 문제는 x의 자릿수의 합으로 x가 나누어지는 수인지 아닌지 검사하는 식을 만드는 것이다.
+먼저 x의 자리수의 합만 구할 수 있다면 조건문을 통해 쉽게 true 및 false를 쉽게 출력할 수 있을 것 같다.
+
+자릿수의 합을 구하려면 먼저 문자열로 바꾸어 각각 배열로 구분지어 시켜주면 좋을 것 같다
+
+function solution(x) {
+    let sum = 0;
+    const arr = String(x).split('');
+}
+
+해당 배열의 요소들을 모두 더하여 sum에 변수로 담자
+
+function solution(x) {
+    let sum = 0;
+    const arr = String(x).split('');
+    for(let i = 0; i < arr.length; i++) {
+        sum += Number(arr[i]);
+    }
+}
+
+후에 조건문을 통해 나머지가 0인 경우 true로 출력 아니라면 flase로 출력하자
+
+function solution(x) {
+    let sum = 0;
+    const arr = String(x).split('');
+    for(let i = 0; i < arr.length; i++) {
+        sum += Number(arr[i]);
+    }
+    if(x % sum === 0) {
+        return true
+    }
+    return false;
+}
