@@ -1,0 +1,12 @@
+이번 문제는 배열의 요소의 위치를 찾아 반환하는 함수를 만드는 것이다.
+
+일단 indexOf라는 메서드를 이용하여 배열의 특정 요소의 인덱스를 찾아주면 좋을 것 같다
+answer 값의 해당 인덱스를 포함시켜 출력하면 되겠다.
+
+function solution(seoul) {
+    const kim = seoul.indexOf("Kim");
+    const answer = `김서방은 ${kim}에 있다`
+    return answer;
+}
+
+
