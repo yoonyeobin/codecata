@@ -1,0 +1,27 @@
+이번 문제는 문자열을 확인하여 길이가 4 혹은 6이고
+숫자로만 구성돼있는지 확인해주는 함수를 만드는 것이다!
+
+function solution(s) {   
+    // s의 길이가 4이거나 6일 때만 숫자인지 확인
+    if(s.length === 4 || s.length === 6) {
+        for(let i = 0; i < s.length; i++){
+            if(isNaN(s[i])) {
+                return false;
+            }
+        }
+    } 
+    
+    // 그게 아니라면 모두 false 리턴
+    else {
+        return false;
+    }
+    // for문이 모두 정상적으로 돌면 true 리턴
+    return true;
+}
+
+이번 문제를 통해 isNaN() 메서드를 배웠다.
+isNaN() 메서드는 인자의 값을 숫자로 변환하려고 시도한 다음, 
+그 결과가 NaN인지 판단해주는 메서드이다
+
+고로 숫자로 변환되는 경우는 true를 리턴
+그렇지 않으면 NaN 즉 flase를 리턴한다.
