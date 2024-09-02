@@ -1,0 +1,20 @@
+오늘 문제는 돈이 얼마나 모자른지 리턴하는 문제이다.
+
+function solution(price, money, count) {
+    // 계속 변경될 금액 변수 선언
+    let addPrice = 0;
+
+    // 증가되는 금액만큼 남은 돈을 계산할 반복문 선언
+    for (let i =1; i <= count; i++) {
+        addPrice = price * i;
+        money -= addPrice;
+    }
+    
+    // 단, 돈이 남자 않을 경우 그냥 0을 리턴
+    if (money > 0) {
+        return 0;
+    }
+    
+    // 모자른 돈을 절대값으로 바꾸어 출력
+    return Math.abs(money);
+}
