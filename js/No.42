@@ -1,0 +1,41 @@
+이번 문제는 자연수 n을 3진법으로 변환후 그걸 앞뒤로 뒤집어 다시 10진법으로 표현하여 출력하는 문제이다
+
+function solution(n) {
+    var answer = 0;
+    let arr = [];
+    while (n/3 > 0) {
+        arr.push(n % 3);
+        n = Math.floor(n / 3);
+    }
+}
+
+console.log(solution(45))
+
+일단 while문을 통해 나머지는 배열에 담고 몫은 계속 나누어주는 식으로
+3진법을 뒤집은 배열을 생성해주었다
+
+해당 배열을 다시 3진법으로만 만들어주면 될 것 같다!
+
+function solution(n) {
+    var answer = 0;
+    let arr = [];
+    while (n / 3 > 0) {
+        arr.push(n % 3);
+        n = Math.floor(n / 3);
+    }
+    let newArr = [];
+    let i = arr.length-1;
+    for (let num of arr) {
+        newArr.push(num * (3 ** i));
+        i--;
+    }
+    for (let num of newArr) {
+        answer += num;
+    }
+    return answer;
+}
+
+새로운 배열을 추가 및 배열의 길이에서 1을 뺀 값을 i로 두고
+i를 감소 시켜가며 for of문을 통해 각 요소에 3의 각 자리수-1을 곱한 값을 곱해서
+새로운 배열을 만들어 주었다
+해당 배열을 다 더해주기만 하면 10진법으로 변환 완성 결과는 성공!
