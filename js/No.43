@@ -1,0 +1,25 @@
+오늘의 문제는 여러 단어로 구성된 문자열의 단어들을 
+짝수번째 알파벳은 대문자, 홀수번째 알파벳은 소문자로 바꾸어 출력하는 문제이다.
+
+function solution(s) {
+    let answer = '';
+    let arr = s.split(' ');
+    for (let i = 0; i < arr.length; i++){
+        for(let j =0; j < arr[i].length; j++){
+            if(j % 2 ===0){
+                answer += arr[i][j].toUpperCase();
+            } else {
+                answer += arr[i][j].toLowerCase();
+            }  
+        }
+        answer += " "
+    }
+    return answer.slice(0, -1);
+}
+
+[코드리뷰]
+split 메서드를 이용하여 각 단어 별로 구분하는 배열을 생성
+이중 for문을 통해 요소별로 요소 안의 글자에 위치 별로
+if문을 이용하여 짝수는 대문자 홀수는 소문자로 변경
+단어 1개가 끝나면 공백 추가
+마지막 return할 때는 마지막 공백을 지우고 return
