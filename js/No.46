@@ -1,0 +1,25 @@
+function solution(sizes) {
+    let maxWidth = 0;
+    let maxHeight = 0;
+    for(let i = 0; i < sizes.length; i++){
+        if(sizes[i][1] > sizes[i][0]){
+          [sizes[i][0],sizes[i][1]] = [sizes[i][1],sizes[i][0]]
+        }
+    }
+    for(let i =0; i < sizes.length; i++) {
+        if(maxWidth < sizes[i][0]){
+            maxWidth = sizes[i][0]
+        }
+    }
+    for(let i =0; i < sizes.length; i++) {
+        if(maxHeight < sizes[i][1]){
+            maxHeight = sizes[i][1]
+        }
+    }
+    return maxWidth * maxHeight
+}
+
+[코드 리뷰]
+최대 가로값과 최대 세로값을 찾기 전에 명함을 가로로 눕혀 수납할 수 있는 상황이 있기 때문에
+먼저 세로 값이 가로 값보다 크다면 for문을 통해 미리 가로값과 세로값을 바꿔두었다
+그 후에 최대 가로값과 세로값을 찾아 곱하여 리턴하여주었다
