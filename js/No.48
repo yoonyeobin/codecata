@@ -1,0 +1,63 @@
+function solution(string) {
+    let answer = "";
+    const zero = ['z', 'e', 'r', 'o']
+    const one = ['o', 'n', 'e']
+    const two = ['t', 'w', 'o']
+    const three = ['t', 'h', 'r', 'e', 'e']
+    const four = ['f', 'o', 'u', 'r']
+    const five = ['f', 'i', 'v', 'e']
+    const six = ['s', 'i', 'x']
+    const seven = ['s', 'e', 'v', 'e', 'n']
+    const eight = ['e', 'i', 'g', 'h', 't']
+    const nine = ['n', 'i', 'n', 'e']
+    let arr = [];
+    
+    for (let i = 0; i < string.length; i++){
+        if (!isNaN(parseInt(string[i]))) {
+            answer += string[i]
+        } else {
+            arr.push(string[i])
+            if(arr.join('') === zero.join('')){
+                answer += "0";
+                arr = [];
+            }if(arr.join('') === one.join('')){
+                answer += "1";
+                arr = [];
+            }if(arr.join('') === two.join('')){
+                answer += "2";
+                arr = [];
+            }if(arr.join('') === three.join('')){
+                answer += "3";
+                arr = [];
+            }if(arr.join('') === four.join('')){
+                answer += "4";
+                arr = [];
+            }if(arr.join('') === five.join('')){
+                answer += "5";
+                arr = [];
+            }if(arr.join('') === six.join('')){
+                answer += "6";
+                arr = [];
+            }if(arr.join('') === seven.join('')){
+                answer += "7";
+                arr = [];
+            }if(arr.join('') === eight.join('')){
+                answer += "8";
+                arr = [];
+            }if(arr.join('') === nine.join('')){
+                answer += "9";
+                arr = [];
+            }
+        }
+    }
+    
+    
+    return Number(answer);
+}
+
+[코드 리뷰]
+for문으로 문자열을 모두 돌기 때문에 빈 배열 arr을 선언하여
+문자일 경우는 arr에 추가해주고 추가된 arr과 미리 선언해둔 변수들을 비교하여
+값이 같다면 해당 변수에 따라 answer의 문자를 추가해주었다
+숫자인 경우는 그냥 바로 추가해 주고
+마지막에 출력된 answer을 다시 숫자로 바꿔 리턴해주었다.
