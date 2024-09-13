@@ -1,0 +1,24 @@
+function solution(array, commands) {
+    let answer = [];
+    
+    for(let i = 0; i < commands.length; i++){
+        let newArr = [];
+        let h = commands[i][0];  
+        let j = commands[i][1];  
+        let k = commands[i][2];  
+        newArr = array.slice(h - 1, j);
+        newArr = newArr.sort((a, b) => a - b);
+        answer.push(newArr[k - 1]);
+    }
+    
+    return answer;
+}
+
+[코드 리뷰]
+먼저 출력해줄 빈 배열 answer을 선언해준 후에
+반복문을 통해 2차원 배열 commands만큼 로직을 수행해준다.
+반복문 안에 빈 배열을 한번 더 선언하고
+h, j, k라는 변수로 2찬원 배열을 이용하여 시작 인덱스 끝 인덱스 마지막 추출할 인덱스를 담을 변수를 선언해준다
+h에서 1을 뺀(인덱스는 0부터 시작하기 때문)인덱스 부터 j전까지 인덱스를 newArr에 담고
+newArr을 sort를 이용해 오름차순으로 정렬한 후에
+k에서1을 뺀 값(인덱스는 0부터 시작하기 때문)을 anwser에 commands의 길이만큼 담아주면 된다!
