@@ -1,0 +1,25 @@
+function solution(s) {
+    var answer = [-1];
+    for(let i = 1; i < s.length; i++){
+        for(let j = i - 1; j >= 0; j--){
+            if(s[i] === s[j]){
+                answer.push(i - j)
+                break;
+            } if (j === 0) {
+                answer.push(-1)
+                break;
+            }
+            }
+        }
+    return answer;
+}
+
+[코드 리뷰]
+이중 for문을 통해 각각의 문자를 비교할 수 있도록 하였다.
+맨 첫글자는 앞에 글자가 없기 때문에 -1을 넣은 상태에서 시작하며
+i는 1부터 시작하게 하여 2번째 글자부터 비교하게 하였다
+
+i안에 j는 숫자를 감소시키며 s[i]와 가까운 글자부터 비교하며 진행하였고
+가까운 곳에서 같은 글자를 찾을 경우 i-j만큼의 값을 answer 배열에 추가해주었다.
+
+j가 0이 될 때 까지 같은 글자가 없다면 -1을 배열에 추가해주었다!
