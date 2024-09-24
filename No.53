@@ -1,0 +1,18 @@
+function solution(a, b, n) {
+    let answer = 0;
+    let share = n;
+    while (share >= a) {
+        let change = Math.floor(share / a);
+        let rest = share % a;
+        answer += change * b;
+        share = change * b + rest;
+    }
+    return answer;
+}
+
+[코드 리뷰]
+반복횟수가 명확하지 않다보니 while문을 통해 문제를 해결하였다.
+share라는 변수에 n값으로 초기화를 해주고 share가 a보다 작아질 때 까지 계산을 반복해주었다 (더 이상 콜라를 교환할 수 없는 상태)
+반복문 안에는 change라는 변수에 콜라를 교환한 횟수를 넣어주고 rest에는 갯수가 부족하여 교환하지 못한 콜라의 값을 담아주었다
+answer에는 교환한 횟수에 마트에서 주는 콜라의 갯수를 곱하여 더하기 할당을 해주었고
+share는 마트에서 받은 콜라병의 갯수와 남아있던 콜라병의 갯수를 더하여 재할당하여 다시 반본문이 실행되도록 해주었다
