@@ -1,0 +1,40 @@
+function solution(k, score) {
+    const answer = []; // 최하위 점수
+    const rank = []; // 명예의 전당
+
+    // k일까지는 모든 출연 가수의 점수가 명예의 전당에 오름
+    for (let i = 0; i < k; i++) {
+        rank.push(score[i]);
+        answer.push(Math.min(...rank));
+        if (i >= score.length - 1) {
+            break;
+        }
+    }
+
+    // 최초 명예의 전당 정렬
+    rank.sort((a, b) => a - b);
+
+    // k일 이후에 명예의 전당보다 높은 수가 있다면, 
+    // 명예의 전당을 바꿔주고, 최하위 점수도 바꿔서 answer에 추가해주기
+    for (let i = k; i < score.length; i++) {
+        if (score[i] > rank[0]) {
+            rank.splice(0, 1);
+            rank.push(score[i]);
+            rank.sort((a, b) => a - b);
+        }
+        answer.push(rank[0]);
+    }
+
+    return answer;
+}
+
+[코드 리뷰]
+먼저 k일까지는 모든 출연 가수의 점수가 명예에 전당에 오르기 때문에
+k일까지의 반복문을 만들어주었다
+코드가 계속 2개만 제출을 실패하여 테스트 케이스를 추가해본 결과
+k가 score.length보다 더 클 경우에는 rank에 NaN값이 들어가게 되는 오류가 발생되어
+i >= score.length - 1 때는 반복문을 멈추는 조건을 추가해주어서 해결해주었다
+
+후에 명예의전당을 정렬해준 뒤
+반복문을 통해 명예의 전당에 최소 점수보다 더 큰 점수가 있을 경우,
+최소 점수는 지우고 새로운 점수를 추가하여 다시 정렬해준 뒤 최하위 점수를 answer에 추가해주었다
