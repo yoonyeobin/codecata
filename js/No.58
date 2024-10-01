@@ -1,0 +1,46 @@
+function solution(answers) {
+    // 시험 찍는 방법
+    const person1 = [1, 2, 3, 4, 5]
+    const person2 = [2, 1, 2, 3, 2, 4, 2, 5]
+    const person3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
+
+    // 정답을 맞춘 횟수
+    const check = [0, 0, 0];
+
+    // 시험 찍는 과정
+    for (let i = 0; i < answers.length; i++) {
+        if (person1[i % person1.length] === answers[i]) {
+            check[0] += 1;
+        }
+        if (person2[i % person2.length] === answers[i]) {
+            check[1] += 1;
+        }
+        if (person3[i % person3.length] === answers[i]) {
+            check[2] += 1;
+        }
+    }
+
+    // 제일 많이 맞춘 갯수
+    const max = Math.max(...check)
+
+    // 제일 많이 맞춘 사람이 누구인지 찾기
+    let result = [];
+
+    for(let i = 0; i < check.length; i++){
+        if(check[i] === max){
+            result.push(i + 1);
+        }
+    }
+    return result
+}
+
+[코드 리뷰]
+먼저 시험을 찍는 규칙에 맞게 각각의 배열을 만들어 주었다
+각각 정답을 몇번 맞췄는지 체크해주는 배열을 만들어주고
+
+인덱스 값을 인덱스에 배열의 길이만큼 나눈 나머지 값을 통해
+배열이 끝나더라도 다시 처음 인덱스부터 순회할 수 있도록 하였고,
+for문을 통해 정답을 각각 몇개 맞추었는지 카운트 해주었다
+
+그 중 가장 많이 맞춘 갯수를 찾아 다시 한번 for문을 통해
+많이 맞춘 갯수와 동일한 인덱스 값을 result에 담아 리턴하여주었다.
