@@ -1,0 +1,80 @@
+[기존 코드]
+function solution(number, limit, power) {
+    // 약수 개수 구하기
+    const divisors = [];
+
+    for (let i = 1; i <= number; i++) {
+        let count = 0;
+        for (let j = 1; j <= i; j++) {
+            if (i % j === 0) {
+                count += 1;
+            }
+        }
+        divisors.push(count);
+    }
+
+    // 제한 수치를 넘은 기사의 공격력 바꿔주기
+    for (let i = 0; i < divisors.length; i++) {
+        if (divisors[i] > limit) {
+            divisors[i] = power;
+        }
+    }
+
+    const result = divisors.reduce((acc, current) => acc + current, 0);
+
+    return result
+}
+
+[sqrt 메서드를 활용한 코드]
+function solution(number, limit, power) {
+    // 약수 개수 구하기
+    const divisors = []
+
+    for (let i = 1; i <= number; i++) {
+        let count = 0;
+        for (let j = 1; j <= Math.sqrt(i); j++) {
+            if (i % j === 0) {
+                count += 1;
+                if (j !== i / j) {
+                    count += 1;
+                }
+            }
+        }
+        divisors.push(count);
+    }
+
+    // 제한 수치를 넘은 기사의 공격력 바꿔주기
+    for (let i = 0; i < divisors.length; i++) {
+        if (divisors[i] > limit) {
+            divisors[i] = power;
+        }
+    }
+
+    const result = divisors.reduce((acc, current) => acc + current);
+
+    return result
+}
+
+[코드 리뷰]
+기존 코드도 로직은 틀리지 않았으나 시간초과 문제로 고민을 하였다
+number의 숫자가 길면 이중 for문은 number의 제곱번 돌기 때문에 시간이 오래 걸리는 것 같았다.
+
+약수를 구하는 효율적인 방법을 찾던중 sqrt 메서드를 알게 되었다.
+sqrt는 특정 숫자의 제곱근을 구해주는 방법이다!
+
+약수는 제곱근까지의 약수를 구해도 상관이 없다!
+그 이유는 약수는 늘 짝이 존재하기 때문이다!
+
+예를 들어 36의 짝수는 1, 2, 3, 4, 6, 9, 12, 18, 36 인데
+제곱근인 6을 제외한 나머지 1과 36 2와 18 3과 12... 등등
+각각 짝을 이루기 때문에 제곱근인 6까지만 약수를 구해주면 된다!
+
+그래서 안에 존재하는 반복문의 j는 제곱근까지만 조건을 주었고
+만약 j가 약수가 맞다면 해당 짝(i/j)도 찾아 카운트를 해주는 조건을 추가하여 2번 카운트하게 해주었다.
+단! 해당 수가 제곱근일 경우는 짝(i/j)도 수가 같기 때문에 1번만 카운트를 추가하여주었다.
+
+j가 1이라면 1과 36(i/j)을 추가한 거고 2라면 18(i/j) 단 6일 경우는 i/j도 6이기 때문에 카운트가 1번만 된다. 
+
+그렇게 추가된 약수의 갯수를 limit와 비교하여 더 크다면 해당 수는 power로 바꿔주고
+reduce 메서드를 이용하여 divisors 배열의 모든 요소를 합한 값을 리턴해주었다!
+
