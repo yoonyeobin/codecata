@@ -1,0 +1,70 @@
+function solution(lottos, win_nums) {
+    let zeroCount = 0;
+    let winCount = 0;
+
+    // 0 찾기
+    for (let i = 0; i < lottos.length; i++) {
+        if (lottos[i] === 0) {
+            zeroCount++;
+        }
+    }
+
+    // 맞는 숫자 갯수 찾기
+    for (let i = 0; i < lottos.length; i++) {
+        for (let j = 0; j < win_nums.length; j++)
+            if (lottos[i] === win_nums[j]) {
+                winCount++
+            }
+    }
+
+    let bestResult = zeroCount + winCount;
+    let worstResult = winCount
+
+    switch (bestResult) {
+        case 2:
+            bestResult = 5;
+            break;
+        case 3:
+            bestResult = 4;
+            break;
+        case 4:
+            bestResult = 3;
+            break;
+        case 5:
+            bestResult = 2;
+            break;
+        case 6:
+            bestResult = 1;
+            break;
+        default:
+            bestResult = 6;
+    }
+
+    switch (worstResult) {
+        case 2:
+            worstResult = 5;
+            break;
+        case 3:
+            worstResult = 4;
+            break;
+        case 4:
+            worstResult = 3;
+            break;
+        case 5:
+            worstResult = 2;
+            break;
+        case 6:
+            worstResult = 1;
+            break;
+        default:
+            worstResult = 6;
+    }
+
+    return [bestResult, worstResult]
+
+}
+
+[코드 리뷰]
+너무 쉽게 풀긴 했는데... 누가 봐도 너무 보기 더러운 코드다... ㅋㅋ
+0의 갯수를 구하고 이중 for문을 통해 맞는 숫자의 갯수를 구해
+최고의 경우와 최악의 경우를 switch문을 통해 출력해주었다!
