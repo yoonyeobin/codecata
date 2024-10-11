@@ -1,0 +1,38 @@
+function solution(n, lost, reserve) {
+    let count = 0;
+    // 여벌옷이 있지만 도난당한 학생부터 추출
+    const lostArr = lost.filter((student) => !reserve.includes(student))
+    const reserveArr = reserve.filter((student) => !lost.includes(student))
+
+    // 오름차순 정렬
+    lostArr.sort((a, b) => a - b)
+    reserveArr.sort((a, b) => a - b)
+
+
+    // 이제 빌릴 수 있는 학생 추출
+    for (let i = 0; i < lostArr.length; i++) {
+        const reserveStduent = reserveArr.find((stduent) => stduent === lostArr[i] + 1 || stduent === lostArr[i] - 1)
+        if (reserveStduent) {
+            const index = reserveArr.indexOf(reserveStduent)
+            reserveArr.splice(index, 1)
+            count++
+        }
+    }
+
+    const answer = n - lostArr.length + count
+    return answer
+}
+
+[코드 리뷰]
+오늘 시간이 너무 오래 걸렸다... 근데 그 이유가 나는 당연히
+배열이 오름차순으로 다 정렬되어 있을 줄 알았는데
+그게 아니다 보니 꼬이는 케이스가 발생됐다 (이건 진짜... 악질 아니냐구ㅠㅠ)
+배열을 sort로 정렬해주니 다행이 모두 통과하였다 코드의 전체적인 로직은 아래와 같다
+
+도난당한 학생중 여벌옷이 있는 학생들을 배열에서 제거해주어 새로운 배열을 먼저 만들고 시작했다
+필터 메서드를 통해 각각 서로 겹치지 않는 학생들만 찾아줌!
+
+그다음 정렬....ㅎㅎ 하구! for문을 통해 여벌옷을 빌려줄 수 있는 학생을 찾았고
+존재하다면 해당 학생은 배열에서 제거하고 count를 올려주었다
+
+최종 적으로 총 학생수에서 빌려야하는 학생수를 더하고 빌린 학생을 빼서 리턴해주었다
