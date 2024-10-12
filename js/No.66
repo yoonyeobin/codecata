@@ -1,0 +1,43 @@
+function solution(s) {
+    let x = s[0];
+    let xCount = 0;
+    let otherCount = 0;
+    let index = 0;
+    let result = 0;
+
+    for (let i = index; i < s.length; i++) {
+        // 마지막 반복에는 그냥 결과 값 증가 (남은 문자열로 이루어진 단어)
+        if (i === s.length - 1) {
+            result++
+        }
+        // x와 같은 알파벳이라면 xcount 증가
+        else if (s[i] === x) {
+            xCount++
+        }
+
+        // x와 다르다면 otherCount 증가
+        else if (s[i] !== x) {
+            otherCount++
+            // 두 값이 같아진다면 result 증가, x값 변경, 각각 카운트 초기화, 인덱스 값 할당
+            if (xCount === otherCount) {
+                result++
+                x = s[i + 1]
+                xCount = 0;
+                otherCount = 0;
+                index = i + 1
+            }
+        }
+    }
+
+    return result
+}
+
+[코드 리뷰]
+초기 전역에 x부터 result 값을 미리 초기화 해주었다.
+s만큼 반복을 돌면서 s[i]가 x와 같다면 xCount 값을 증가시켜주고
+다르다면 otherCount를 증가시켰다 
+
+그러다 두 값이 같아진다면 result 값을 올려주면서 
+카운트는 초기화 해주고 x와 인덱스 값을 다시 할당해주었다.
+
+처음 조건은 결국 마지막 글자라면 result 값을 올려서 나머지 글자들을 처리했다.
