@@ -1,0 +1,51 @@
+function solution(keymap, targets) {
+    const results = [];
+
+    for (let i = 0; i < targets.length; i++) {
+        let result = 0;
+        let target = targets[i]; // target의 각 문자열들
+        let valid = true; // 문자열을 입력할 수 있는지 유효성 체크
+
+        for (let j = 0; j < target.length; j++) {
+            let firstTarget = target[j] // 문자열의 각 글자들
+            let indexArr = [] // 문자열을 몇번만에 입력할 수 있는지 담는 바구니
+
+            for (let k = 0; k < keymap.length; k++) {
+                let key = keymap[k]; // keympa의 각 키들
+                let index = key.indexOf(firstTarget); // 몇번만에 누를 수 있는지 확인
+
+                // 누를 수 있을 때만 바구니에 추가
+                if (index !== -1) {
+                    indexArr.push(index)
+                }
+            }
+
+            // 추가된 게 하나도 없다면 해당 문자열은 누를 수 없으므로 유효성 false로 전환하고 다음 단어 검사를 위해 반복문 종료
+            if (indexArr.length === 0) {
+                valid = false
+                break;
+            }
+
+            // 인덱스 바구니를 오름차순으로 정렬하여 가장 낮은 값의 1을 더한 값을 결과에 더하기 할당
+            indexArr.sort((a, b) => a - b)
+            result += indexArr[0] + 1;
+
+        }
+        // 최종적으로 valid가 true면 result 값을 추가해주고 그렇지 않다면 -1을 추가해준다.
+        if (valid) {
+            results.push(result);
+        } else {
+            results.push(-1);
+        }
+    }
+
+    return results;
+}
+
+[코드 리뷰]
+내가 아는 메서드들이 많지 않아.. 오늘도 지저분하게 푼 것 같다... ㅎ
+3중 for문을 이용하여 풀어보았다.
+
+코드가 길어서 오늘은 주석으로 각각 코드의 특징을 입력해두었다..
+내가 푼 방식은 정리하자면 targets의 각 문자열의 각 글자별로 keymap에서 제일 작은 인덱스 값을 찾아서 
+그 값이 존재하면 result에 추가하고 results에도 추가하고 그렇지 않다면 result 대신 -1을 추가해 주었다.
