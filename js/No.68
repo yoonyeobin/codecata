@@ -1,0 +1,27 @@
+function solution(s, skip, index) {
+    const alphabet = "abcdefghijklmnopqrstuvwxyz"
+    const indexs = []
+    for (let i = 0; i < s.length; i++) {
+        let sIndex = alphabet.indexOf(s[i])
+        for (let j = 1; j <= index; j++) {
+            sIndex = (sIndex + 1) % 26;
+            while (skip.includes(alphabet[sIndex])) {
+                sIndex = (sIndex + 1) % 26;
+            }
+        }
+        indexs.push(sIndex)
+    }
+
+    for (let i = 0; i < indexs.length; i++) {
+        indexs[i] = alphabet[indexs[i]]
+    }
+    return indexs.join('')
+}
+
+[코드 리뷰]
+변수 alphabet에 모든 알파벳을 담아주었다.
+이중 for문을 통해서 s의 인덱스 값에 index 만큼 더해주었다.
+단 while문을 추가하여 sIndex값이 skip에 포함되어 있다면 계속 더해주었다
+
+해단 인덱스를 indexs에 담아주고 반복문을 통해 다시 알파벳으로 바꿔주어
+join 메서드를 이용하여 다시 문자열로 바꿔 리턴해주었다.
