@@ -1,0 +1,70 @@
+function solution(survey, choices) {
+    let rcount = 0;
+    let tcount = 0;
+    let ccount = 0;
+    let fcount = 0;
+    let jcount = 0;
+    let mcount = 0;
+    let acount = 0;
+    let ncount = 0;
+    let answer = ''
+
+    for (let i = 0; i < survey.length; i++) {
+        const first = survey[i][0];
+        const second = survey[i][1];
+        const choice = choices[i];
+
+        if (choice === 4) {
+         // 중립 선택지는 아무런 점수 변화가 없음
+            continue
+        }
+
+        if (choice < 4) {
+         // 4보다 작은 경우: 첫 번째 문자에 가산
+            switch (first) {
+                case "R": rcount += 4 - choice; break;
+                case "T": tcount += 4 - choice; break;
+                case "C": ccount += 4 - choice; break;
+                case "F": fcount += 4 - choice; break;
+                case "J": jcount += 4 - choice; break;
+                case "M": mcount += 4 - choice; break;
+                case "A": acount += 4 - choice; break;
+                case "N": ncount += 4 - choice; break;
+            }
+        } else {
+         // 4보다 큰 경우: 두 번째 문자에 가산
+            switch (second) {
+                case "R": rcount += choice - 4; break;
+                case "T": tcount += choice - 4; break;
+                case "C": ccount += choice - 4; break;
+                case "F": fcount += choice - 4; break;
+                case "J": jcount += choice - 4; break;
+                case "M": mcount += choice - 4; break;
+                case "A": acount += choice - 4; break;
+                case "N": ncount += choice - 4; break;
+            }
+        }
+    }
+
+    // 최종 성격 유형 결정  
+    answer += (rcount >= tcount) ? 'R' : 'T'
+    answer += (ccount >= fcount) ? 'C' : 'F'
+    answer += (jcount >= mcount) ? 'J' : 'M'
+    answer += (acount >= ncount) ? 'A' : 'N'
+
+    return answer
+}
+
+[코드 리뷰]
+뭔가 더 깔끔하게 풀 수 있을 것 같은데 나는 좀 지저분하게 푼 것 같다.. ㅋㅋ
+
+각 유형마다 count를 계산할 수 있도록 변수를 선언해두고
+반복문을 통해 배열에 앞글자와 두번째 글자를 확인하였다.
+
+choices[i]가 4와 같다면 count 변화가 없으므로 continue를 해주었고
+4보다 작다면 앞에 글자를 인자로 가져와 앞글자 값에 4 - choice 값을 더해주었다.
+반대로 4보다 크다면 두번째 글자를 가져와 해당 글자카운트에 choice - 4만큼 값을 더해주었다
+
+마지막으로 삼항연산자를 통해 answer 값에 미리 계산해둔 count를 비교하여
+점수가 같을 경우 사전순으로 빠른 문자가 앞에 오므로 
+사전순으로 빠른 글자들이 크거나 같다면 해당 글자 아니라면 다른 글자를 추가해주었다
