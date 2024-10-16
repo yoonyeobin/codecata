@@ -1,0 +1,53 @@
+function solution(wallpaper) {
+    const result = []
+    let minIndex = 50;
+    let maxIndex = 0;
+
+    // 첫번째 값 찾기
+    for (let i = 0; i < wallpaper.length; i++) {
+        const file = wallpaper[i]
+        if (file.includes("#")) {
+            result.push(i)
+            break;
+        }
+    }
+
+    // 두번째 값 찾기
+    for (let i = 0; i < wallpaper.length; i++) {
+        const fileIndex = wallpaper[i].indexOf("#")
+        if (fileIndex === -1) {
+            continue;
+        } else if (minIndex > fileIndex) {
+            minIndex = fileIndex
+        }
+    }
+    result.push(minIndex);
+
+    // 세번째 값 찾기
+    for (let i = wallpaper.length - 1; i < wallpaper.length; i--) {
+        const file = wallpaper[i]
+        if (file.includes("#")) {
+            result.push(i + 1)
+            break;
+        }
+    }
+
+    // 네번째 값 찾기
+    for (let i = 0; i < wallpaper.length; i++) {
+        const fileIndex = wallpaper[i].lastIndexOf("#")
+        if (fileIndex === -1) {
+            continue;
+        } else if (maxIndex < fileIndex) {
+            maxIndex = fileIndex
+        }
+    }
+    result.push(maxIndex + 1);
+
+    return result;
+}
+
+[코드 리뷰]
+첫번째 값은 wallpaper 요소중 #이 가장 먼저 등장하는 값을 넣어주었고
+두번째 값은 wallpaper 요소들읜 #인덱스를 비교하여 가장 먼저 #이 나온 인덱스 값을 넣어주었다
+세번째 값은 wallpaper 요소중 #이 가장 먼저 등장하는 인덱스의 +1을 한 값을 넣어주었고
+네번째 값은wallpaper 요소들읜 #인덱스를 비교하여 가장 마지막에 #이 나온 인덱스의 1을 더한 값을 넣어주었다
