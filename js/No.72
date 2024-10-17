@@ -1,0 +1,41 @@
+function solution(today, terms, privacies) {
+    const result = [];
+
+    // 약관 유형과 유효기간 분리
+    const newTerms = terms.map(item => item.split(" "));
+
+    // 수집 날짜와 약관 유형 분리
+    const newPrivacies = privacies.map(item => item.split(" "));
+
+    // 오늘까지 걸린 총 날짜
+    const newToday = today.split(".")
+    const countDay = (parseInt(newToday[0]) * 12 * 28) + ((parseInt(newToday[1]) - 1) * 28) + parseInt(newToday[2])
+
+    for (let i = 0; i < newPrivacies.length; i++) {
+        const privacieDay = newPrivacies[i][0].split(".");
+        // 수집날짜까지 걸린 총 날짜
+        const privacieCountDay = (parseInt(privacieDay[0]) * 12 * 28) + ((parseInt(privacieDay[1]) - 1) * 28) + parseInt(privacieDay[2])
+        const privacieType = newPrivacies[i][1];
+        for (let j = 0; j < newTerms.length; j++) {
+            const termType = newTerms[j][0];
+            const termMonth = parseInt(newTerms[j][1])
+            if (privacieType === termType) {
+                const differenceDay = countDay - privacieCountDay
+                const month = differenceDay / 28;
+                if (month >= termMonth) {
+                    result.push(i + 1)
+                }
+            }
+        }
+    }
+    return result;
+}
+
+[코드 리뷰]
+인자로 받는 배열들을 먼저 map 메서드를 이용하여 이중 배열로 만든 뒤 배열 안에 배열로 각각 구분해주었다
+날짜는 split 메서드를 활용해 .으로 구분해주었다.
+모든 달은 28일로 가정하기 때문에 총 일수를 (년도 * 12 * 28) + (월 - 1 * 28) + 일 로 구해주었고
+
+이중 for문으로 날짜는 마찬가지로 .으로 구분해주고 걸린 날짜도 마찬가지로 구해주었다
+타입을 terms의 타입과 같은지 비교하여 같다면 오늘까지 걸린 일수 - 수집일까지 걸린 날짜 값을 구해
+28로 나누어 나온 달이 약관 보관 가능 달보다 크거나 같다면 해당 약관을 폐기해주었다.
