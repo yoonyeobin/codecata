@@ -1,0 +1,54 @@
+[기존 코드]
+function solution(players, callings) {
+    for (let i = 0; i < callings.length; i++) {
+        for (let j = 0; j < players.length; j++) {
+            const player = players[j]
+
+            if (player === callings[i]) {
+                const temp = players[j]
+                players[j] = players[j - 1]
+                players[j - 1] = temp
+                break;
+            }
+        }
+    }
+
+    return players;
+}
+
+[수정 코드]
+function solution(players, callings) {
+    const playersObject = {};
+
+    // 플레이어의 인덱스 값 추출
+    for (let i = 0; i < players.length; i++) {
+        playersObject[players[i]] = i;
+    }
+
+    // 플레이어 객체에서 값을 불러와서 인덱스를 변경해줌
+    for (let i = 0; i < callings.length; i++) {
+        const player = callings[i];
+        const index = playersObject[player];
+
+        const frontPlayer = players[index - 1];
+        players[index - 1] = player;
+        players[index] = frontPlayer;
+
+
+        playersObject[player] = index - 1;
+        playersObject[frontPlayer] = index;
+    }
+
+    return players;
+}
+
+[코드 리뷰]
+기존에는 이중 for문을 통해 인덱스를 변경해주었다
+로직에는 문제가 없으나 인자의 length가 길어질수록 시간초과가 나왔다...
+
+방법은 이중 for문을 돌았던 이유는 그 때 그 때 players의 인덱스 값을 찾기 위해서였는데
+미리 players를 객체화 하여 각 선수들을 키 인덱스 값을 벨류로 하여
+인덱스 값을 쉽게 불러올 수 있었다
+
+그렇게 서로의 인덱스 값을 바꿔준 뒤
+객체도 동일하게 인덱스 값을 바꿔주어 반복문을 1번만 돌릴 수 있었다.
