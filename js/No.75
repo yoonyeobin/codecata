@@ -1,0 +1,78 @@
+function solution(id_list, report, k) {
+    const count = {};
+    const reportObj = {}
+
+    // 카운트 객체 만들기 ({ muzi: 0, frodo: 0, apeach: 0, neo: 0 })
+    id_list.forEach(id => {
+        count[id] = 0;
+    });
+
+    // {muzi: [ 'frodo', 'neo' ], apeach: [ 'frodo', 'muzi' ],frodo: [ 'neo' ]}
+    report.forEach((id) => {
+        const [key, value] = id.split(" ");
+        // 배열로 초기화
+        if (!reportObj[key]) {
+            reportObj[key] = [];
+        }
+        // 이미 존재하는 벨류라면 추가되지 않음
+        if (!reportObj[key].includes(value)) {
+            reportObj[key].push(value)
+        }
+    })
+
+
+    // flat 메서드를 이용하여 배열을 1개로 만듦
+    const reportedId = Object.values(reportObj).flat();
+    const reportedIdCount = {}
+
+    // 신고를 몇번 당했는지 확인
+    reportedId.forEach((id) => {
+        if (!reportedIdCount[id]) {
+            reportedIdCount[id] = 1;
+        } else {
+            reportedIdCount[id] += 1;
+        }
+    })
+
+    // 신고 횟수가 k보다 크거나 같다면 결과 배열에 추가
+    const resultId = [];
+    for (const key in reportedIdCount) {
+        if (reportedIdCount[key] >= k) {
+            resultId.push(key)
+        }
+    }
+
+    // 결과 배열에 값을 가지고 있는 유저의 카운트를 올려줌
+    for (const key in reportObj) {
+        for (let i = 0; i < resultId.length; i++) {
+            const id = resultId[i];
+            if (reportObj[key].includes(id)) {
+                count[key] += 1;
+            };
+        }
+    }
+
+    // 벨류만 배열로 만들어 담기
+    const result = Object.values(count)
+
+    return result
+}
+
+[코드 리뷰]
+갈수록 문제들이 어려워진다.. 분명 더 쉽게 푸는 방법이 있을텐데...
+나는 먼저 결과 리턴을 위해 각각 신고한 유저가 이용정지가 됐는지 카운트를 확인해주는 객체를 만들어줬다.
+
+이제 신고이력을 확인하기 위해 report 배열을 순회하며 각각 신고자(key) 신고당한유저(value)로 나누어 
+신고자:[id..] 형태로 누가 누구누구를 신고했는지 확인하는 객체를 또 만들었다.
+단, 동일한 신고자가 동일한 아이디를 신고하는 경우에는 추가하지 않았다
+
+누가 몇번을 신고당했는지 확인하기 위해 만들어진 객체의 벨류들을 배열에 담았고
+배열을 1개로 통합하기 위해 flat 메서드를 이용하였다.
+
+해당 배열을 다시 순회하며 각 유저가 몇번 신고당했는지 확인할 수 있는 객체를 만들었다
+해당 객체를 순회하여 k보다 크거나 같은 신고를 당한 유저들을 따로 배열에 추가해두고
+
+아까 만들어둔 누가 각각 누구를 신고했는지 확인하는 객체를 순회하며
+해당 객체가 id배열의 값을 가지고 있다면 카운트를 추가해주었다
+
+카운트를 가지고 있는 객체를 value만 담는 배열로 만들어서 리턴해주었다!
