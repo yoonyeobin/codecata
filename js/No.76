@@ -1,0 +1,12 @@
+function solution(s) {
+    const numbers = s.split(" ");
+    const min = Math.min(...numbers)
+    const max = Math.max(...numbers)
+
+    return [min, max].join(" ")
+}
+
+[코드 리뷰]
+갑자기 너무 쉬운 문제가 나와서 당황했다...
+각각 최솟값과 최댓값을 구한 후
+배열로 만들어 공백으로 구분된 문자열로 만들어 리턴하였다
