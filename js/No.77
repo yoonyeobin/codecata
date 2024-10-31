@@ -1,0 +1,27 @@
+function solution(s) {
+    const stringArr = s.split(" ");
+    let answer = ""
+
+    for (let string of stringArr) {
+        if (string === "") {
+            answer += string + " ";
+            continue;
+        }
+        else if (String(string[0])) {
+            string = string[0].toUpperCase() + string.slice(1).toLowerCase();
+        }
+        answer += string + " ";
+
+    }
+
+    return answer.slice(0, -1);
+}
+
+[코드 리뷰]
+코드는 금방 짰는데 예외 케이스가 계속 나와 실패했다...
+이유를 찾아보니.. 공백에 경우 공백을 지우라는 조건이 없었기 때문이다..
+
+그래서 조건에 공백일 경우에도 공백을 추가해주었더니 해결되었다
+다른 조건은 첫 문자가 문자열일 경우에는 대문자로 바꿔주기만 하였고
+
+마지막에 마지막 공백만 지운채 리턴해주었다.
