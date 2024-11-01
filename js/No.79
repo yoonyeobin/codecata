@@ -1,0 +1,46 @@
+[첫번째 코드]
+function solution(n) {
+    let answer = 0;
+    let arr = [n - 1, n - 2]
+
+    while (arr.length > 0) {
+        const newArr = [];
+        arr.forEach((num) => {
+            if (num === 1) {
+                answer++
+            } else if (num > 1) {
+                newArr.push(num - 1);
+                newArr.push(num - 2)
+            }
+        })
+        arr = newArr;
+    }
+    return answer % 1234567;
+}
+
+[두번째 코드]
+function solution(n) {
+    let a = 0;
+    let b = 1;
+    let result = 0;
+
+    for (let i = 2; i <= n; i++) {
+        result = (a + b) % 1234567;
+        a = b;
+        b = result;
+    }
+
+    return b
+}
+
+[코드 리뷰]
+처음에는 n을 하나씩 쪼개서 모든 값을 다 더하는 방식으로 진행을 했더니
+n이 커지면 배열안에 요소들이 많아져서 메모리 부족 상태가 발생됐다
+
+거꾸로 n까지 반복하며 결과를 b에 담고 b(이전 결과)를 a에 담아주면서 더해주었다,
+첫 a는 f(0)로 0이 되고 첫 b는 f(1)로 1을 넣어주었다
+
+n은 2 이상의 숫자만 들어가기에 i를 2로 초기화하여 n과 같아질 때 까지 반복해주었다
+result 값에는 a+b 값을 넣어주고 단 숫자가 1234567보다 커지는 것을 방지하기 위해 계속 나눈 나머지 값을 result에 담아주었다
+a에 값에 기존 reuslt 값을 넣고 b에는 새로운 result 값을 넣어 이전 값과 현재 값을 더해줄 수 있었다
+
