@@ -1,0 +1,29 @@
+function solution(s) {
+    let zeroCount = 0
+    let functionCount = 0;
+
+    while (s !== "1") {
+        let newS = '';
+        for (let i = 0; i < s.length; i++) {
+            if (s[i] === '0') {
+                zeroCount++
+            } else {
+                newS += s[i]
+            }
+        }
+        s = newS.length.toString(2);
+        functionCount++
+    }
+
+    return [functionCount, zeroCount]
+}
+
+[코드 리뷰]
+리턴할 zeroCount와 functionCount를 선언해 준 뒤
+while 문을 통해 s가 1이 될 때 까지 반복해주었다
+
+while문 안에서 반복문을 돌며 0이 있을 경우 zeroCount를 증가시키고
+1인 경우에는 newS에 추가해주었다
+
+그렇게 1만 남은 newS의 길이를 이진수로 변환해도 1이 아니라면 
+functionCount를 증가시키면서 다시 while문이 돌게된다.
