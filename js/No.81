@@ -1,0 +1,16 @@
+function solution(n, a, b) {
+    let answer = 0;
+
+    while (a !== b) {
+        a = Math.ceil(a / 2);
+        b = Math.ceil(b / 2);
+        answer++;
+    }
+
+    return answer;
+}
+
+[코드 리뷰]
+a와 b를 각각 반으로 나누어 올림한 값으로 계속 갱신해주었다.
+갱신할 때 마다 answer의 값을 증가시켜주었고
+조건은 a와 b가 만나는 지점 즉 값이 같아질 때 answer을 리턴해주었다.
