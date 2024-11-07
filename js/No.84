@@ -1,0 +1,31 @@
+function solution(k, tangerine) {
+    const tangerineCount = new Map();
+
+    for (let size of tangerine) {
+        tangerineCount.set(size, (tangerineCount.get(size) || 0) + 1);
+    }
+
+    const sortedCounts = [...tangerineCount.values()].sort((a, b) => b - a);
+
+    let result = 0;
+
+    for (let i = 0; i < sortedCounts.length; i++) {
+        const count = sortedCounts[i];
+        k -= count
+        result++
+        if (k <= 0) {
+            return result;
+        }
+    }
+}
+
+[코드 리뷰]
+오늘은 Map 자료구조에 대해 공부하였다.
+각 사이즈 별로 몇개씩 가지고 있는지 알아내기 좋은 자료구조인 것 같다.
+
+먼저 새로운 Map 자료구조를 선언해주고 반복문을 통해
+사이즈 별로 몇개를 가지고 있는지 세팅해주었다.
+
+세팅된 값을 토대로 vlaue만 뽑아내 sort를 통해 내림차순 해주었고
+다시 한번 반복문을 통해 내람차순한 배열에 첫번째 요소부터 k를 차감해 준 뒤
+k가 0보다 작아지면 result 값을 리턴해주었다.
