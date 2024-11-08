@@ -1,0 +1,42 @@
+function solution(s) {
+    const brackets = {
+        ')': '(',
+        ']': '[',
+        '}': '{'
+    }
+
+    let result = 0;
+    for (let i = 0; i < s.length; i++) {
+        let isValid = true;
+        const stack = [];
+        for (let char of s) {
+            if (brackets[char]) {
+                if (stack.pop() !== brackets[char]) {
+                    isValid = false
+                    break;
+                }
+            } else {
+                stack.push(char);
+            }
+        }
+        if (isValid && stack.length === 0) result++
+        s = s + s[0]
+        s = s.slice(1);
+    }
+
+    return result;
+}
+
+[코드 리뷰]
+오늘은 stack 자료구조에 대해 알게 되었다.
+
+먼저 닫는 괄호의 짝을 벨류로 하는 객체를 선언해 준뒤
+s.length만큼 반복문을 돌면서 문자열을 회전시켜주면 
+그 안에서 2중 for문을 통해 검증해주었다
+
+여는 괄호인 경우에는 스텍에쌓아주면서
+문자가 닫는 괄호일 경우 현재 stack에 마지막 요소가 짝이 맞지 않다면
+isValid를 false로 바꿔주며 반복문을 멈춰주었다
+
+그렇게 반복문이 모두 잘 반복되고 stack에 괄호들을 모두 제거했을 경우에만 
+result 값을 올려주어 리턴해주었다
