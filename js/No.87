@@ -1,0 +1,13 @@
+function solution(citations) { 
+  for (let i = 1; i <= citations.length; i++) {
+    const count = citations.filter((citation) => citation >= i).length;
+    if (count < i) {
+      return i - 1;
+    }
+  }
+  return citations.length;
+}
+
+[코드 리뷰]
+citations를 반복하여 i보다 작아질 때 까지 i보다 큰 숫자의 갯수를 구하여 
+조건에 만족했을 때 i - 1값을 리턴해주었고 모든 논문이 조건을 만족하면 그대로 반환해 주었다
